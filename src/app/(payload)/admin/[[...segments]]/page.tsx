@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import config from '@payload-config'
 import { RootPage, generatePageMetadata } from '@payloadcms/next/views'
 import { importMap } from '../importMap'
+export const runtime = 'nodejs';
 
 type Args = {
   params: Promise<{
