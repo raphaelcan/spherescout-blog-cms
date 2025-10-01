@@ -6,7 +6,6 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-import dns from 'dns/promises'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -17,12 +16,6 @@ import { Authors } from './collections/Authors'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
-/**
- * On résout le host Supabase en IPv4 une seule fois au démarrage
- * Cela évite que Vercel choisisse IPv6 par défaut.
- */
-const { address } = await dns.lookup('db.vnlihfpnjftcioasuprp.supabase.co', { family: 6 })
 
 export default buildConfig({
   admin: {
@@ -39,11 +32,7 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      host: address, // 👈 IPv4 forcée
-      port: 5432,
-      database: 'postgres',
-      user: 'postgres',
-      password: process.env.SUPABASE_PASSWORD,
+      connectionString: process.env.DATABASE_URI || '',
       ssl: { rejectUnauthorized: false },
     },
   }),
