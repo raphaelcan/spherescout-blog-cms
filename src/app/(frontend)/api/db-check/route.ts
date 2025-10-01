@@ -5,7 +5,7 @@ export const runtime = 'nodejs';
 
 export async function GET() {
   try {
-    const address = await dns.lookup('db.<yourid>.supabase.co');
+    const address = await dns.lookup('db.vnlihfpnjftcioasuprp.supabase.co');
     return Response.json({ resolved: address.address });
   } catch (err: any) {
     return Response.json({ error: err.message }, { status: 500 });
