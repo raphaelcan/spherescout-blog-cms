@@ -1,0 +1,28 @@
+{
+  "node": {
+    "401e94f3ed994dec612f804fd5c453ca03ba8c280c": {
+      "workers": {
+        "app/(payload)/admin/[[...segments]]/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fraphaelcanyasse%2Fprojects%2Fspherescout.io%2Fblog-cms%2Fsrc%2Fapp%2F(payload)%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22401e94f3ed994dec612f804fd5c453ca03ba8c280c%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fraphaelcanyasse%2Fprojects%2Fspherescout.io%2Fblog-cms%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%2260513508e45758ccd0bf6bc9dd1797476e2768a9d5%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": true
+        }
+      },
+      "layer": {
+        "app/(payload)/admin/[[...segments]]/page": "rsc"
+      }
+    },
+    "60513508e45758ccd0bf6bc9dd1797476e2768a9d5": {
+      "workers": {
+        "app/(payload)/admin/[[...segments]]/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fraphaelcanyasse%2Fprojects%2Fspherescout.io%2Fblog-cms%2Fsrc%2Fapp%2F(payload)%2Flayout.tsx%22%2C%5B%7B%22id%22%3A%22401e94f3ed994dec612f804fd5c453ca03ba8c280c%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%2C%5B%22%2FUsers%2Fraphaelcanyasse%2Fprojects%2Fspherescout.io%2Fblog-cms%2Fnode_modules%2F%40payloadcms%2Fnext%2Fdist%2Flayouts%2FRoot%2Findex.js%22%2C%5B%7B%22id%22%3A%2260513508e45758ccd0bf6bc9dd1797476e2768a9d5%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": true
+        }
+      },
+      "layer": {
+        "app/(payload)/admin/[[...segments]]/page": "rsc"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "8CPYzSrirRtH+4kklOu5W7SnUkSiROobuwXN8HVcioc="
+}
