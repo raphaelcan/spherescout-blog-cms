@@ -40,30 +40,4 @@ export default buildConfig({
     payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
-  hooks: {
-    afterChange: [
-      {
-        collection: 'posts',
-        hook: async ({ doc, operation }) => {
-          // Only trigger webhook for published posts
-          if (doc.status === 'published') {
-            try {
-              await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate?secret=${process.env.REVALIDATION_SECRET}`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  type: `post.${operation}`,
-                  slug: doc.slug,
-                }),
-              })
-            } catch (error) {
-              console.error('Failed to revalidate:', error)
-            }
-          }
-        },
-      },
-    ],
-  },
 })
