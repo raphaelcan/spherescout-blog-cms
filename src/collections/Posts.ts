@@ -1,5 +1,16 @@
 import type { CollectionConfig } from 'payload'
 
+type PostFormData = {
+  seo?: {
+    jsonSchema?: {
+      enabled?: boolean
+    }
+    howTo?: {
+      enabled?: boolean
+    }
+  }
+}
+
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
@@ -263,7 +274,7 @@ export const Posts: CollectionConfig = {
               ],
               defaultValue: 'BlogPosting',
               admin: {
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -271,7 +282,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Article headline (if different from title)',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -279,7 +290,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Alternative or subtitle',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -287,7 +298,7 @@ export const Posts: CollectionConfig = {
               type: 'number',
               admin: {
                 description: 'Article word count (auto-calculated if left empty)',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -295,7 +306,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Estimated reading time (e.g., "PT5M" for 5 minutes)',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -303,7 +314,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Section or category of the article',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -311,7 +322,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Comma-separated keywords for schema',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -319,7 +330,7 @@ export const Posts: CollectionConfig = {
               type: 'group',
               label: 'Publisher Information',
               admin: {
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
               fields: [
                 {
@@ -351,7 +362,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'URL of the main entity page (usually the post URL)',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -360,7 +371,7 @@ export const Posts: CollectionConfig = {
               defaultValue: true,
               admin: {
                 description: 'Is this content free to access?',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
             {
@@ -368,7 +379,7 @@ export const Posts: CollectionConfig = {
               type: 'group',
               label: 'Part of Publication',
               admin: {
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
               fields: [
                 {
@@ -393,7 +404,7 @@ export const Posts: CollectionConfig = {
               admin: {
                 language: 'json',
                 description: 'Custom JSON-LD schema (will be merged with auto-generated schema)',
-                condition: (data: any) => data.seo?.jsonSchema?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.jsonSchema?.enabled),
               },
             },
           ],
@@ -458,7 +469,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Name of the how-to guide',
-                condition: (data: any) => data.seo?.howTo?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.howTo?.enabled),
               },
             },
             {
@@ -466,7 +477,7 @@ export const Posts: CollectionConfig = {
               type: 'textarea',
               admin: {
                 description: 'Description of what the guide accomplishes',
-                condition: (data: any) => data.seo?.howTo?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.howTo?.enabled),
               },
             },
             {
@@ -474,7 +485,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Total time needed (e.g., "PT30M" for 30 minutes)',
-                condition: (data: any) => data.seo?.howTo?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.howTo?.enabled),
               },
             },
             {
@@ -482,7 +493,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               admin: {
                 description: 'Estimated cost with currency (e.g., "USD 50")',
-                condition: (data: any) => data.seo?.howTo?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.howTo?.enabled),
               },
             },
             {
@@ -490,7 +501,7 @@ export const Posts: CollectionConfig = {
               type: 'array',
               admin: {
                 description: 'Required supplies/materials',
-                condition: (data: any) => data.seo?.howTo?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.howTo?.enabled),
               },
               fields: [
                 {
@@ -505,7 +516,7 @@ export const Posts: CollectionConfig = {
               type: 'array',
               admin: {
                 description: 'Required tools',
-                condition: (data: any) => data.seo?.howTo?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.howTo?.enabled),
               },
               fields: [
                 {
@@ -520,7 +531,7 @@ export const Posts: CollectionConfig = {
               type: 'array',
               admin: {
                 description: 'How-to steps',
-                condition: (data: any) => data.seo?.howTo?.enabled,
+                condition: (data: PostFormData) => Boolean(data.seo?.howTo?.enabled),
               },
               fields: [
                 {
