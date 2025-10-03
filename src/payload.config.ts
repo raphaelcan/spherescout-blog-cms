@@ -1,4 +1,4 @@
-// storage-adapter-import-placeholder
+import { gcsStorage } from '@payloadcms/storage-gcs'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -13,7 +13,6 @@ import { Posts } from './collections/Posts'
 import { Categories } from './collections/Categories'
 import { Tags } from './collections/Tags'
 import { Authors } from './collections/Authors'
-console.log(process.env.SUPABASE_CA_CERT)
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 export default buildConfig({
@@ -40,6 +39,22 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    // storage-adapter-placeholder
+    gcsStorage({
+      bucket: process.env.GCS_BUCKET || '',
+      options: {
+        projectId: process.env.GOOGLE_CLOUD_PROJECT_ID,
+        credentials: {
+          client_email: process.env.GOOGLE_CLOUD_CLIENT_EMAIL,
+          private_key: process.env.GOOGLE_CLOUD_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        },
+      },
+      collections: {
+        media: {
+          generateFileURL: ({ filename }) => {
+            return `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${filename}`
+          },
+        },
+      },
+    }),
   ],
 })

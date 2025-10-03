@@ -11,6 +11,23 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'enableWebP',
+      type: 'checkbox',
+      label: 'Convert to WebP',
+      defaultValue: true,
+      admin: {
+        description: 'Automatically convert uploaded images to WebP format for better compression',
+      },
+    },
   ],
-  upload: true,
+  upload: {
+    formatOptions: {
+      format: 'webp',
+      options: {
+        quality: 100,
+        lossless: true,
+      },
+    },
+  },
 }
