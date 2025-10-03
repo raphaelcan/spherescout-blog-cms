@@ -16,7 +16,6 @@ import { Authors } from './collections/Authors'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -33,7 +32,9 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
-      ssl: { rejectUnauthorized: false },
+      ssl: { rejectUnauthorized: true,     ca: process.env.SUPABASE_CA_CERT?.replace(/\\n/g, '\n')
+},
+
     },
   }),
   sharp,
