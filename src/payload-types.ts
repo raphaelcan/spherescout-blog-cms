@@ -203,7 +203,7 @@ export interface Post {
    */
   featuredImage?: (number | null) | Media;
   author: number | Author;
-  category: number | Category;
+  category?: (number | null) | Category;
   tags?: (number | Tag)[] | null;
   status: 'draft' | 'published' | 'scheduled';
   /**

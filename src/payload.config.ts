@@ -1,7 +1,7 @@
 import { gcsStorage } from '@payloadcms/storage-gcs'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, EXPERIMENTAL_TableFeature, BlocksFeature } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -13,6 +13,7 @@ import { Posts } from './collections/Posts'
 import { Categories } from './collections/Categories'
 import { Tags } from './collections/Tags'
 import { Authors } from './collections/Authors'
+import { HTMLBlock } from './collections/blocks/HTMLBlock'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 export default buildConfig({
@@ -26,7 +27,10 @@ export default buildConfig({
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
-      // Tables are usually included by default, but you can explicitly add them
+      EXPERIMENTAL_TableFeature(),
+      BlocksFeature({
+        blocks: [HTMLBlock],
+      }),
     ],
   }),
   secret: process.env.PAYLOAD_SECRET || '',
