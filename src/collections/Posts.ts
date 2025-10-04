@@ -18,7 +18,16 @@ export const Posts: CollectionConfig = {
     defaultColumns: ['title', 'author', 'category', 'status', 'createdAt'],
   },
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => {
+      // In admin, show all posts (including drafts)
+      if (user) return true
+      // For public API, only show published posts
+      return {
+        status: {
+          equals: 'published',
+        },
+      }
+    },
   },
   fields: [
     {
