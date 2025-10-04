@@ -23,7 +23,12 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Posts, Categories, Tags, Authors],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      // Tables are usually included by default, but you can explicitly add them
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

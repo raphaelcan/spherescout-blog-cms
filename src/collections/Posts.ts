@@ -36,7 +36,7 @@ export const Posts: CollectionConfig = {
       },
     },
     {
-      name: 'excerpt',
+      name: 'description',
       type: 'textarea',
       required: true,
       admin: {

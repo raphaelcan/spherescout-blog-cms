@@ -182,7 +182,7 @@ export interface Post {
   /**
    * Brief summary of the post for previews and SEO
    */
-  excerpt: string;
+  description: string;
   content: {
     root: {
       type: string;
@@ -667,7 +667,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  excerpt?: T;
+  description?: T;
   content?: T;
   featuredImage?: T;
   author?: T;
