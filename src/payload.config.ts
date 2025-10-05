@@ -49,7 +49,7 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     gcsStorage({
-      bucket: process.env.GCS_BUCKET || '',
+      bucket: process.env.GCS_BUCKET || 'spherescout-cms-media',
       options: {
         projectId: process.env.GOOGLE_CLOUD_PROJECT_ID,
         credentials: {
@@ -60,7 +60,7 @@ export default buildConfig({
       collections: {
         media: {
           generateFileURL: ({ filename }) => {
-            return `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${filename}`
+            return `https://storage.googleapis.com/${process.env.GCS_BUCKET || 'spherescout-cms-media'}/${filename}`
           },
         },
       },

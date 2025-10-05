@@ -15,7 +15,7 @@ export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'author', 'category', 'status', 'createdAt'],
+    defaultColumns: ['title', 'author', 'category', 'status', 'publishedDate', 'createdAt'],
   },
   access: {
     read: ({ req: { user } }) => {
@@ -106,7 +106,21 @@ export const Posts: CollectionConfig = {
       name: 'publishedDate',
       type: 'date',
       admin: {
-        description: 'When the post should be published',
+        description: 'When the post should be published. Required for published and scheduled posts.',
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
+      },
+      hooks: {
+        beforeChange: [
+          ({ data, value }) => {
+            // Auto-set published date to current time if not provided for published posts
+            if (data?.status === 'published' && !value) {
+              return new Date().toISOString()
+            }
+            return value
+          },
+        ],
       },
     },
     {

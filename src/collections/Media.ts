@@ -5,6 +5,9 @@ export const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    useAsTitle: 'filename',
+  },
   fields: [
     {
       name: 'alt',
@@ -25,8 +28,8 @@ export const Media: CollectionConfig = {
     formatOptions: {
       format: 'webp',
       options: {
-        quality: 100,
-        lossless: true,
+        quality: 85,
+        lossless: false,
       },
     },
   },

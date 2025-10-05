@@ -207,7 +207,7 @@ export interface Post {
   tags?: (number | Tag)[] | null;
   status: 'draft' | 'published' | 'scheduled';
   /**
-   * When the post should be published
+   * When the post should be published. Required for published and scheduled posts.
    */
   publishedDate?: string | null;
   seo?: {
