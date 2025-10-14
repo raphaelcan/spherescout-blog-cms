@@ -152,9 +152,6 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
-  /**
-   * Automatically convert uploaded images to WebP format for better compression
-   */
   enableWebP?: boolean | null;
   updatedAt: string;
   createdAt: string;
