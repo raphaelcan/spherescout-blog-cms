@@ -15,7 +15,7 @@ export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'author', 'category', 'status', 'publishedDate', 'createdAt'],
+    defaultColumns: ['title', 'language', 'author', 'category', 'status', 'publishedDate', 'createdAt'],
   },
   access: {
     read: ({ req: { user } }) => {
@@ -56,6 +56,25 @@ export const Posts: CollectionConfig = {
       name: 'content',
       type: 'richText',
       required: true,
+    },
+    {
+      name: 'language',
+      type: 'select',
+      options: [
+        {
+          label: 'English',
+          value: 'en',
+        },
+        {
+          label: 'French',
+          value: 'fr',
+        },
+      ],
+      defaultValue: 'en',
+      required: true,
+      admin: {
+        description: 'Language of the post content',
+      },
     },
     {
       name: 'featuredImage',

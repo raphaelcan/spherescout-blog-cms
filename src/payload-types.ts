@@ -196,6 +196,10 @@ export interface Post {
     [k: string]: unknown;
   };
   /**
+   * Language of the post content
+   */
+  language: 'en' | 'fr';
+  /**
    * Main image for the post
    */
   featuredImage?: (number | null) | Media;
@@ -666,6 +670,7 @@ export interface PostsSelect<T extends boolean = true> {
   slug?: T;
   description?: T;
   content?: T;
+  language?: T;
   featuredImage?: T;
   author?: T;
   category?: T;
