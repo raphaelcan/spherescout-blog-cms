@@ -37,20 +37,36 @@ export const Media: CollectionConfig = {
         const file = req?.file
         if (!file) return
 
+        // Replace spaces with hyphens in filename
+        if (file.name) {
+          file.name = file.name.replace(/\s+/g, '-')
+        }
+
         const isGIF =
           file.mimetype === 'image/gif' ||
           file.name?.toLowerCase().endsWith('.gif')
 
         if (isGIF) {
-          // 🧠 Trick Payload: tell it this is not an image
+          // Store original MIME type in req context
+          if (!req.context) req.context = {}
+          req.context.originalMimeType = file.mimetype
+          // Temporarily change MIME type to prevent WebP conversion
           file.mimetype = 'application/octet-stream'
         }
       },
     ],
     beforeChange: [
       ({ data, req }) => {
-        if (req?.file?.name?.toLowerCase().endsWith('.gif')) {
+        const file = req?.file
+        if (file?.name?.toLowerCase().endsWith('.gif')) {
           data.enableWebP = false
+          // Restore original MIME type for proper storage
+          const originalMimeType = req?.context?.originalMimeType
+          if (originalMimeType) {
+            data.mimeType = originalMimeType
+          } else {
+            data.mimeType = 'image/gif'
+          }
         }
         return data
       },
