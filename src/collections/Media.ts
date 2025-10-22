@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { optimizeGif } from '../utils/gifOptimizer'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -32,7 +33,7 @@ export const Media: CollectionConfig = {
   },
   hooks: {
     beforeOperation: [
-      ({ req, operation }) => {
+      async ({ req, operation }) => {
         if (operation !== 'create') return
         const file = req?.file
         if (!file) return
@@ -47,10 +48,23 @@ export const Media: CollectionConfig = {
           file.name?.toLowerCase().endsWith('.gif')
 
         if (isGIF) {
+          console.log(`Uploading GIF: ${file.name} (${Math.round(file.size / 1024)}KB)`)
+
+          try {
+            // Optimize GIF before processing
+            const optimizedBuffer = await optimizeGif(file.data)
+            file.data = optimizedBuffer
+            file.size = optimizedBuffer.length
+          } catch (error) {
+            console.error('GIF optimization failed:', error)
+            // Continue with original file if optimization fails
+          }
+
           // Store original MIME type in req context
           if (!req.context) req.context = {}
           req.context.originalMimeType = file.mimetype
-          // Temporarily change MIME type to prevent WebP conversion
+
+          // Always keep as GIF, prevent WebP conversion
           file.mimetype = 'application/octet-stream'
         }
       },
@@ -58,15 +72,12 @@ export const Media: CollectionConfig = {
     beforeChange: [
       ({ data, req }) => {
         const file = req?.file
-        if (file?.name?.toLowerCase().endsWith('.gif')) {
+        const originalMimeType = req?.context?.originalMimeType
+
+        if (originalMimeType === 'image/gif') {
+          // Keep as optimized GIF, disable WebP conversion
           data.enableWebP = false
-          // Restore original MIME type for proper storage
-          const originalMimeType = req?.context?.originalMimeType
-          if (originalMimeType) {
-            data.mimeType = originalMimeType
-          } else {
-            data.mimeType = 'image/gif'
-          }
+          data.mimeType = 'image/gif'
         }
         return data
       },
