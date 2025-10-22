@@ -19,15 +19,14 @@ export const Posts: CollectionConfig = {
   },
   access: {
     read: ({ req: { user } }) => {
-      return true
-      // // In admin, show all posts (including drafts)
-      // if (user) return true
-      // // For public API, only show published posts
-      // return {
-      //   status: {
-      //     equals: 'published',
-      //   },
-      // }
+      // In admin, show all posts (including drafts)
+      if (user) return true
+      // For public API, only show published posts
+      return {
+        status: {
+          equals: 'published',
+        },
+      }
     },
   },
   fields: [
